@@ -62,7 +62,8 @@ suburb_rents <- suburb_rents %>%
   mutate(dwelling_type = ifelse(dwelling_type == "All", "All Dwellings", dwelling_type)) %>%
   mutate(bedrooms = ifelse(bedrooms == "dwellings", "",bedrooms)) %>%
   mutate(month_year = as.Date(parse_date_time(month_year, order = "bY"))) %>%
-  mutate(rent = as.numeric(rent))
+  mutate(rent = as.numeric(rent)) %>%
+  mutate(data_updated = Sys.Date())
 
 
 # ORGANISE SUBURB DATA
@@ -82,7 +83,7 @@ suburb_rents <- suburb_rents %>% inner_join(brisbane_suburbs,
 #############################################
 
 # get it to overwrite the existing file - but also write a time stamped version as well for posterity
-write.csv(suburb_rents, paste0('outputs/','rta_suburb_rents','.csv'))
-write.csv(suburb_rents, paste0('outputs/',Sys.Date(), 'rta_suburb_rents','.csv'), row.names=FALSE)
+write.csv(suburb_rents, paste0('outputs/','rta_suburb_rents','.csv'), row.names=FALSE)
+write.csv(suburb_rents, paste0('outputs/',Sys.Date(), '_rta_suburb_rents','.csv'), row.names=FALSE)
 
 
