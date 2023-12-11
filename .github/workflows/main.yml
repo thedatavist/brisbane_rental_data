@@ -1,0 +1,41 @@
+# Daily import of data
+name:  get_rta_rental_data
+
+# Controls when action will run
+on: 
+  push:
+    branches: main
+
+
+Jobs:
+  autoscrape:
+    # the type of runner the job will run on
+    runs-on: macos-latest
+
+    #load repo and install R
+    steps:
+    - uses: actions/checkout@master
+    - uses: r-lib/actions/setup-r@master
+    
+    # Set up R
+    - name: Install Packages
+      run: |
+        R -e 'install.packages("openxlxs")'
+        R -e 'install.packages("dplyr")'
+        R -e 'install.packages("tidyr")'
+        R -e 'install.packages("lubridate")'
+        R -e 'install.packages("stringr")'
+        
+    # Run R Script
+    - name: Get RTA Data
+      run: Rscript import_clean_rental_data.R
+    
+    # Add new files in the output folder, commit along with other modified files, push
+    - name: Commit files
+      run: |
+        git config --local user.name actions-user
+        git config --local user.email "actions@github.com"
+        git add outputs/*
+        git commit -am "GH ACTION Headlines $(date)"
+        git push origin main
+    
