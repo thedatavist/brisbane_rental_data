@@ -38,4 +38,7 @@ Jobs:
         git add outputs/*
         git commit -am "GH ACTION Headlines $(date)"
         git push origin main
+      env:
+        REPO_KEY: ${{secrets.GITHUB_TOKEN}}
+        username: github-actions
     
