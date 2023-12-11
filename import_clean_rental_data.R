@@ -89,7 +89,15 @@ gs4_auth(path = Sys.getenv('GSHEET_PAT'))
 # Output data
 #############################################
 
-# get it to overwrite the existing file - but also write a time stamped version as well for posterity
+# Output to google drive first
+# find existing Google sheet
+brd_g_sheet_meta_data <- gs4_find('rta_suburb_rents')
+# Read in sheet data
+brd_g_sheet <- read_sheet(brd_g_sheet_meta_data$id)
+sheet_write(suburb_rents, ss = ss, sheet = "suburb_rents")
+
+# Store a copy in github as well as a CSV
+# Get it to overwrite the existing file - but also write a time stamped version as well for posterity
 write.csv(suburb_rents, paste0('outputs/','rta_suburb_rents','.csv'), row.names=FALSE)
 write.csv(suburb_rents, paste0('outputs/',Sys.Date(), '_rta_suburb_rents','.csv'), row.names=FALSE)
 
