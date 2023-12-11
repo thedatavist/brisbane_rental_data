@@ -83,6 +83,6 @@ suburb_rents <- suburb_rents %>% inner_join(brisbane_suburbs,
 
 # get it to overwrite the existing file - but also write a time stamped version as well for posterity
 write.csv(suburb_rents, paste0('outputs/','rta_suburb_rents','.csv'))
-write.csv(suburb_rents, paste0('outputs/',Sys.Date(), 'rta_suburb_rents','.csv'))
+write.csv(suburb_rents, paste0('outputs/',Sys.Date(), 'rta_suburb_rents','.csv'), row.names=FALSE)
 
 
