@@ -5,6 +5,9 @@ on:
 jobs:
   import-data:
     runs-on: ubuntu-latest
+    env:
+      GSHEET_PAT: ${{secrets.BRD_KEY}}
+      
     steps:
       - name: Set up R
         uses: r-lib/actions/setup-r@v2
