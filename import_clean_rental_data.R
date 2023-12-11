@@ -17,6 +17,7 @@ library(dplyr)
 library(tidyr)
 library(lubridate)
 library(stringr)
+library(googledrive)
 library(googlesheets4)
 
 
@@ -83,14 +84,16 @@ suburb_rents <- suburb_rents %>% inner_join(brisbane_suburbs,
 #############################################
 # Google Drive Authentication
 #############################################
+# auth both drive and google sheets using our json token
+
+drive_auth(path = Sys.getenv('GSHEET_PAT'))
 gs4_auth(path = Sys.getenv('GSHEET_PAT'))
 
 #############################################
 # Output data
 #############################################
 
-# Output to google drive first
-# find existing Google sheet
+# Find existing Google sheet and then overwrite it
 brd_g_sheet_meta_data <- gs4_find('rta_suburb_rents')
 # Read in sheet data
 brd_g_sheet <- read_sheet(brd_g_sheet_meta_data$id)
