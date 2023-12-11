@@ -13,11 +13,7 @@ jobs:
         uses: r-lib/actions/setup-r-dependencies@v2
         with:
           packages: |
-            R -e 'install.packages("openxlxs")'
-            R -e 'install.packages("dplyr")'
-            R -e 'install.packages("tidyr")'
-            R -e 'install.packages("lubridate")'
-            R -e 'install.packages("stringr")'
+            any::openxlsx
       - name: Check out repository
         uses: actions/checkout@v3
 
