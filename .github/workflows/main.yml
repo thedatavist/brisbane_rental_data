@@ -14,6 +14,10 @@ jobs:
         with:
           packages: |
             any::openxlsx
+            any::dplyr
+            any::tidyr
+            any::lubridate
+            any::stringr
       - name: Check out repository
         uses: actions/checkout@v3
 
