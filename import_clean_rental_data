@@ -1,11 +1,27 @@
+###########################################################
+#
+# This code downloads the latest quarterly rental data from 
+# Queensland Rental Tenancies Authority and prepared it for 
+# further graphical analyses in Tableau.
+#
+# Code written by : Darragh Murray 
+# Contact: @thedatavist / thedatavist@gmail.com)
+###########################################################
+
+
+#############################################
+# Load Libraries
+#############################################
 library(openxlsx)
 library(dplyr)
 library(tidyr)
 library(lubridate)
 library(stringr)
 
+#############################################
+# Data Import
+#############################################
 
-# end of line labels from: https://r-graph-gallery.com/web-line-chart-with-labels-at-end-of-line.html
 
 # IMPORT DATA FROM THE RTA
 suburb_rents = read.xlsx("https://www.rta.qld.gov.au/sites/default/files/2023-04/rta-bond-statistics.xlsx", 
@@ -13,11 +29,16 @@ suburb_rents = read.xlsx("https://www.rta.qld.gov.au/sites/default/files/2023-04
                     startRow=6,
                     colNames = FALSE)
 
+# READ IN BRISBANE SUBURB LIST
 brisbane_suburbs = read.csv("https://www.data.brisbane.qld.gov.au/data/dataset/3a3392dd-4f23-43bc-b7fd-9606a611445e/resource/6fb89462-5ac5-4589-8576-cdca03652bc8/download/suburb-and-adjoining-suburb-november-2023.csv")
 
-# CLEAN UP ROW HEADERS
 
-# Seperate off the first two rows of data
+#############################################
+# Data clean / preparation
+#############################################
+
+# CLEAN UP ROW HEADERS
+# Separate off the first two rows of data
 header_row = slice(suburb_rents,1)
 subheader_row = slice(suburb_rents,2) 
 
@@ -52,11 +73,16 @@ brisbane_suburbs <- brisbane_suburbs %>%
   distinct()
 
 
+# JOIN RENT DATA TO SUBURB DATA
 suburb_rents <- suburb_rents %>% inner_join(brisbane_suburbs, 
                               by=c('suburb'))
 
-# OUTPUT DATA
+#############################################
+# Output data
+#############################################
 
+# get it to overwrite the existing file - but also write a time stamped version as well for posterity
 write.csv(suburb_rents, paste0('outputs/','rta_suburb_rents','.csv'))
+write.csv(suburb_rents, paste0('outputs/',Sys.date(), 'rta_suburb_rents','.csv'))
 
 
