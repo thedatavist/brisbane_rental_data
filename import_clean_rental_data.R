@@ -17,6 +17,8 @@ library(dplyr)
 library(tidyr)
 library(lubridate)
 library(stringr)
+library(googlesheets4)
+
 
 #############################################
 # Data Import
@@ -77,6 +79,11 @@ brisbane_suburbs <- brisbane_suburbs %>%
 # JOIN RENT DATA TO SUBURB DATA
 suburb_rents <- suburb_rents %>% inner_join(brisbane_suburbs, 
                               by=c('suburb'))
+
+#############################################
+# Google Drive Authentication
+#############################################
+gs4_auth(path = Sys.getenv('BRD_S_ACCT_TOKEN'))
 
 #############################################
 # Output data
