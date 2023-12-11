@@ -83,7 +83,7 @@ suburb_rents <- suburb_rents %>% inner_join(brisbane_suburbs,
 #############################################
 # Google Drive Authentication
 #############################################
-gs4_auth(path = Sys.getenv('BRD_S_ACCT_TOKEN'))
+gs4_auth(path = Sys.getenv('GSHEET_PAT'))
 
 #############################################
 # Output data
