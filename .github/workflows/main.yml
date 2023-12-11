@@ -7,7 +7,7 @@ on:
     branches: main
 
 
-Jobs:
+jobs:
   autoscrape:
     # the type of runner the job will run on
     runs-on: macos-latest
