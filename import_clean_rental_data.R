@@ -89,8 +89,6 @@ suburb_rents <- suburb_rents %>% inner_join(brisbane_suburbs,
 drive_auth(path = Sys.getenv('GSHEET_PAT'))
 gs4_auth(path = Sys.getenv('GSHEET_PAT'))
 
-
- GSHEET_LOCATION
 #############################################
 # Output data
 #############################################
