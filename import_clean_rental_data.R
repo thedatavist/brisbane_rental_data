@@ -96,7 +96,8 @@ gs4_auth(path = Sys.getenv('GSHEET_PAT'))
 #############################################
 
 # Find existing Google sheet and then overwrite it
-sheet_location <- Sys.getenv('GSHEET_LOCATION')
+#sheet_location <- Sys.getenv('GSHEET_LOCATION')
+sheet_location <- "https://docs.google.com/spreadsheets/d/1GdvbFe0WcbWwQ6qeqih31T1GJxxK93aZqIKlGGfhUH8"
 sheet_write(suburb_rents, sheet_location, sheet = "suburb_rents")
 
 # Store a copy in github as well as a CSV
