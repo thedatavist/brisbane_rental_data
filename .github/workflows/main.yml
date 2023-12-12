@@ -7,6 +7,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       GSHEET_PAT: ${{secrets.BRD_KEY}}
+      GSHEET_LOCATION: ${{secrets.BRD_GDRIVE_LOCATION}}
       
     steps:
       - name: Set up R
