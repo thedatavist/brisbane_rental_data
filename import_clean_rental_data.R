@@ -89,15 +89,15 @@ suburb_rents <- suburb_rents %>% inner_join(brisbane_suburbs,
 drive_auth(path = Sys.getenv('GSHEET_PAT'))
 gs4_auth(path = Sys.getenv('GSHEET_PAT'))
 
+
+ GSHEET_LOCATION
 #############################################
 # Output data
 #############################################
 
 # Find existing Google sheet and then overwrite it
-brd_g_sheet_meta_data <- gs4_find('rta_suburb_rents')
-# Read in sheet data
-brd_g_sheet <- read_sheet(brd_g_sheet_meta_data$id)
-sheet_write(suburb_rents, ss = ss, sheet = "suburb_rents")
+sheet_location <- Sys.getenv('GSHEET_LOCATION')
+sheet_write(suburb_rents, sheet_location, sheet = "suburb_rents")
 
 # Store a copy in github as well as a CSV
 # Get it to overwrite the existing file - but also write a time stamped version as well for posterity
