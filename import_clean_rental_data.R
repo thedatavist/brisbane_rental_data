@@ -66,7 +66,14 @@ suburb_rents <- suburb_rents %>%
   mutate(bedrooms = ifelse(bedrooms == "dwellings", "",bedrooms)) %>%
   mutate(month_year = as.Date(parse_date_time(month_year, order = "bY"))) %>%
   mutate(rent = as.numeric(rent)) %>%
-  mutate(data_updated = Sys.Date())
+  mutate(suburb = case_when(
+    suburb == "The Gap (4061)" ~ "The Gap",
+    suburb ==" Brisbane City" ~ "Brisbane",
+    suburb == "West End (4101)" ~ "West End",
+    TRUE ~ suburb
+    )
+  )%>%
+  mutate(data_updated = Sys.time())
 
 
 # ORGANISE SUBURB DATA
